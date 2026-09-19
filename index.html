@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101b18">
+  <meta name="description" content="A simple, precise guitar tuner. Tune by microphone or ear with common tunings and reference tones.">
+  <title>Attune — Find your sound</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="Attune home"><span class="brand-icon"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M11 5v12a5 5 0 0 0 10 0V5M16 22v6M6 11h5M21 11h5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span>attune<span class="brand-period">.</span></a>
+      <div class="header-right"><span class="local-badge"><i></i> YOUR SOUND STAYS YOURS</span><button class="help-button" id="helpButton" aria-label="How to use the tuner">?</button></div>
+    </header>
+    <main>
+      <section class="intro"><div class="eyebrow"><span></span> A LITTLE TUNING. A LOT OF POSSIBILITY.</div><h1>Find your sound<span>.</span></h1><p>Your guitar, in harmony. A simple tuner for whatever you play.</p></section>
+      <div class="workspace">
+        <section class="tuner-panel" aria-label="Guitar tuner">
+          <div class="tuner-toolbar"><div class="mode-tabs" aria-label="Tuner mode"><button id="guitarMode" class="active" aria-pressed="true">Guitar</button><button id="chromaticMode" aria-pressed="false">Chromatic</button></div><div class="live-status" id="liveStatus"><i></i><span>MIC OFF</span></div></div>
+          <div class="tuner-display">
+            <div class="pitch-message" id="pitchMessage">LET’S GET IN TUNE</div>
+            <div class="note-display" id="noteDisplay"><span id="noteLetter">E</span><sub id="noteOctave">2</sub></div>
+            <div class="frequency"><span id="frequencyValue">82.41</span> <span>Hz</span><span class="frequency-divider">/</span><span id="frequencyLabel">target frequency</span></div>
+            <div class="meter" id="meter"><div class="meter-labels"><span>♭ <small>FLAT</small></span><span class="center-label">IN TUNE</span><span><small>SHARP</small> ♯</span></div><div class="meter-track"><div class="tune-zone"></div><div class="meter-ticks" id="meterTicks"></div><div class="meter-needle" id="meterNeedle"></div></div><div class="meter-values"><span>−50</span><span>−25</span><span>0</span><span>+25</span><span>+50</span></div></div>
+            <div class="reading" id="reading">Ready when you are</div>
+            <button class="start-button" id="startButton"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="9" y="3" width="6" height="12" rx="3" stroke="currentColor" stroke-width="1.7"/><path d="M6 11v1a6 6 0 0 0 12 0v-1M12 18v3M9 21h6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><span>Start tuning</span></button>
+            <p class="mic-hint" id="micHint" role="status">Allow microphone access to hear your guitar.</p>
+          </div>
+          <div class="string-section"><div class="string-heading"><span id="stringHeading">YOUR STRINGS <span>LOW → HIGH</span></span><label class="auto-label">Auto detect<input type="checkbox" id="autoDetect" checked><span class="switch"></span></label></div><div class="strings" id="strings"></div><p class="string-help" id="stringHelp">Pluck a string, or select one to tune it individually.</p></div>
+        </section>
+        <aside class="settings-column">
+          <section class="settings-card"><div class="card-title"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4v16M12 4v16M19 4v16M2 9h6M9 15h6M16 8h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><h2>Make it your tuning</h2></div><label class="field-label" for="tuningSelect">TUNING</label><select id="tuningSelect"></select><div class="tuning-notes" id="tuningNotes"></div><div class="card-divider"></div><label class="field-label" for="micSelect">MICROPHONE</label><select id="micSelect"><option value="">Default microphone</option></select><p class="field-caption" id="deviceHint">Available inputs appear when connected.</p><div class="calibration-row"><div><label class="field-label" for="calibration">REFERENCE PITCH</label><p class="field-caption">Concert A₄</p></div><div class="stepper"><button id="pitchDown" aria-label="Lower reference pitch">−</button><input id="calibration" type="number" min="420" max="460" value="440" aria-label="Reference pitch in hertz"><span>Hz</span><button id="pitchUp" aria-label="Raise reference pitch">+</button></div></div><div class="tolerance-setting"><label class="field-label" for="tolerance">IN-TUNE TOLERANCE</label><select id="tolerance"><option value="2">±2 cents · Precise</option><option value="5" selected>±5 cents · Standard</option><option value="10">±10 cents · Relaxed</option><option value="15">±15 cents · Loose</option><option value="20">±20 cents · Most forgiving</option></select></div><div class="confirmation-setting"><label class="auto-label">Keep screen awake<input type="checkbox" id="keepScreenAwake" checked aria-describedby="wakeStatus"><span class="switch"></span></label><p class="field-caption" id="wakeStatus">Stays on while tuning or playing a reference tone.</p></div><div class="confirmation-setting"><label class="auto-label">In-tune sound<input type="checkbox" id="confirmationSound" checked><span class="switch"></span></label><p class="field-caption">A gentle chime when your string is in tune.</p></div></section>
+          <section class="reference-card"><div class="card-title"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m11 5-6 4H2v6h3l6 4V5ZM15 8a6 6 0 0 1 0 8M18 5a10 10 0 0 1 0 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><h2>Prefer to tune by ear?</h2></div><p>Play a reference tone and match your string to the sound.</p><div class="reference-controls"><button id="playTone" aria-label="Play reference tone"><span id="playSymbol">▶</span> <span id="playLabel">Play E₂</span></button><label class="volume-control"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m11 5-6 4H2v6h3l6 4V5ZM15 8a6 6 0 0 1 0 8" stroke="currentColor" stroke-width="1.6"/></svg><input id="volume" type="range" min="0" max="100" value="35" aria-label="Reference tone volume"></label></div><p class="tone-hint" id="toneHint">Select a string to change the reference note.</p></section>
+          <div class="tip"><span class="tip-icon">✦</span><p><strong>A good tune starts with a little quiet.</strong> Pluck one string at a time and let it ring. Tune up to the note for a steadier result.</p></div>
+        </aside>
+      </div>
+      <div class="benefits"><span><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m10 2 6 2v5c0 4-6 8-6 8S4 13 4 9V4l6-2Z" stroke="currentColor" stroke-width="1.3"/><path d="m7 9 2 2 4-4" stroke="currentColor" stroke-width="1.3"/></svg>Private by design</span><span><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.3"/><path d="m11 5-4 6h3l-1 4 4-6h-3l1-4Z" fill="currentColor"/></svg>Real-time pitch detection</span><span><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 9v6h4V9H3ZM13 9v6h4V9h-4ZM3 10V8a7 7 0 0 1 14 0v2" stroke="currentColor" stroke-width="1.3"/></svg>No downloads. Just play.</span></div>
+    </main>
+    <footer><span>Made for the love of playing.</span><button id="installButton" class="install-button" hidden>Install Attune</button><span>STAY IN TUNE. KEEP CREATING.</span></footer>
+  </div>
+  <dialog id="helpDialog"><button id="closeHelp" class="close-help" aria-label="Close help">×</button><div class="eyebrow">A QUICK SOUND CHECK</div><h2>A few notes on tuning.</h2><ol><li>Choose a tuning, then press <strong>Start tuning</strong> and allow microphone access.</li><li>Pluck one string near your microphone. Auto detect finds the nearest string; select a string to lock onto it.</li><li>If the pitch is flat, tighten gently. If it’s sharp, loosen. Aim for the green center, within <span id="helpTolerance">±5 cents</span>.</li><li>Use <strong>Play</strong> to hear a reference tone. Microphone readings pause while the tone plays.</li></ol><p>Chromatic mode follows any note. Microphone access requires localhost or HTTPS. Your audio is processed on this device and is never recorded or uploaded.</p><p id="installStatus" role="status" hidden></p></dialog>
+  <p id="appVersion" class="app-version" aria-label="App version">AtTune</p>
+  <script type="module" src="pwa.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

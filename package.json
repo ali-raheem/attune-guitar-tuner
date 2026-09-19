@@ -1,0 +1,16 @@
+{
+  "name": "attune-guitar-tuner",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-version.mjs",
+    "prestart": "npm run build",
+    "start": "node server.js",
+    "pretest": "npm run build",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
