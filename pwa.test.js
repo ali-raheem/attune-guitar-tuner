@@ -57,3 +57,12 @@ test('fetch handles app navigations offline and leaves unrelated requests alone'
   assert.equal(await request('https://external.test/at/'), undefined);
   assert.equal(await request('https://example.test/at/', 'navigate', 'POST'), undefined);
 });
+
+test('manifest id is a stable app identity distinct from start_url', async () => {
+  const manifest = JSON.parse(await readFile(new URL('./manifest.webmanifest', import.meta.url), 'utf8'));
+  // Browsers resolve id against the start_url's origin, not the manifest URL.
+  const start = new URL(manifest.start_url, 'https://example.test/at/manifest.webmanifest');
+  const id = new URL(manifest.id, start.origin);
+  assert.equal(id.href, 'https://example.test/attune');
+  assert.notEqual(id.href, start.href);
+});
