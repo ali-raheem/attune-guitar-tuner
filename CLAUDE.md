@@ -23,7 +23,7 @@ There is no linter or formatter configured.
 ## Architecture
 
 - `index.html` loads two module entry points: `pwa.js` (install prompt, service worker registration, footer version label) and `app.js` (all tuner UI and audio).
-- `app.js` is the only file touching the DOM/Web Audio. It runs a `requestAnimationFrame` loop (`listen`) that samples an `AnalyserNode` roughly every 65 ms, calls `detectPitch`, median-smooths the last 5 readings, picks the target note (auto string / manual string / chromatic), and updates the cents meter. Settings persist to `localStorage` key `attune-settings`.
+- `app.js` is the only file touching the DOM/Web Audio. It runs a `requestAnimationFrame` loop (`listen`) that samples an `AnalyserNode` roughly every 65 ms, calls `detectPitch`, median-smooths the last 5 readings, picks the target note (auto string / manual string / chromatic), and updates the cents meter. Settings persist to `localStorage` key `attune-settings:<deployment path>` (falling back to the legacy unprefixed `attune-settings` on first read).
 - Pure, DOM-free logic lives in separate modules so it can be unit-tested under Node:
   - `pitch.js` — `TUNINGS` (MIDI note numbers), note/frequency math with configurable A4, and YIN pitch detection with an RMS quiet-input gate.
   - `confirmation.js` — `TuningConfirmation` state machine for the in-tune chime (600 ms dwell inside tolerance, fires once per note, re-arms only after 700 ms detuned beyond tolerance + 7 cents).

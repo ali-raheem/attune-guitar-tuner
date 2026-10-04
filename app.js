@@ -3,8 +3,10 @@ import { TuningConfirmation } from './confirmation.js';
 import { KeepAwake } from './keep-awake.js';
 
 const $ = id => document.getElementById(id);
+// Settings are per deployment path; localStorage is shared across the whole origin.
+const settingsKey = `attune-settings:${new URL('./', import.meta.url).pathname}`;
 let saved = {};
-try { saved = JSON.parse(localStorage.getItem('attune-settings') || '{}') || {}; } catch {}
+try { saved = JSON.parse(localStorage.getItem(settingsKey) ?? localStorage.getItem('attune-settings') ?? '{}') || {}; } catch {}
 let tuning = TUNINGS[saved.tuning] ? saved.tuning : 'standard';
 let a4 = Number.isFinite(saved.a4) && saved.a4 >= 420 && saved.a4 <= 460 ? saved.a4 : 440;
 let confirmationSound = saved.confirmationSound !== false;
@@ -32,7 +34,7 @@ let samples, scratch, lastSample = 0, lastPitch = 0, history = [], chromaticNote
 const subs = ['₀', '₁', '₂', '₃', '₄', '₅', '₆', '₇', '₈', '₉'];
 const currentMidi = () => mode === 'chromatic' ? chromaticNote : TUNINGS[tuning].notes[selected];
 const labelFor = midi => { const n = noteName(midi); return `${n.name}${subs[n.octave] || n.octave}`; };
-function persist() { try { localStorage.setItem('attune-settings', JSON.stringify({ tuning, a4, confirmationSound, tolerance, keepScreenAwake })); } catch {} }
+function persist() { try { localStorage.setItem(settingsKey, JSON.stringify({ tuning, a4, confirmationSound, tolerance, keepScreenAwake })); } catch {} }
 function resetHistory() { history = []; lastPitch = 0; confirmation.interrupt(); }
 function drawStrings() {
   $('strings').replaceChildren();
