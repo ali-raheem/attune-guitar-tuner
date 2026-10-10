@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Attune: a browser-only guitar tuner PWA. Plain ES modules, no bundler, no runtime or dev dependencies. Node ≥ 18 is only used for the dev server, the build stamp, and tests.
 
-Note: the parent directory's `/home/ali/Workspace/CLAUDE.md` describes an unrelated Rust project (Fallout save editor) — ignore it here.
+Note: `../CLAUDE.md` describes the shoryuken.me workspace and its shared-origin rules; `/home/ali/Workspace/CLAUDE.md` above it describes an unrelated Rust project (Fallout save editor) — ignore that one here.
 
 ## Commands
 
