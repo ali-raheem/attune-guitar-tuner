@@ -1,5 +1,14 @@
 # Attune
 
+[![CI](https://github.com/ali-raheem/attune-guitar-tuner/actions/workflows/ci.yml/badge.svg)](https://github.com/ali-raheem/attune-guitar-tuner/actions/workflows/ci.yml) [![GitHub Pages](https://github.com/ali-raheem/attune-guitar-tuner/actions/workflows/pages.yml/badge.svg)](https://github.com/ali-raheem/attune-guitar-tuner/actions/workflows/pages.yml)
+
+**▶ Try it live: [shoryuken.me/at](https://shoryuken.me/at/)** · mirror on [GitHub Pages](https://ali-raheem.github.io/attune-guitar-tuner/) · installable, works offline
+
+<p align="center">
+  <a href="https://shoryuken.me/at/"><img src="docs/screenshots/desktop.webp" alt="Attune on a desktop browser" width="74%"></a>
+  <a href="https://shoryuken.me/at/"><img src="docs/screenshots/mobile.webp" alt="Attune on a phone" width="22%"></a>
+</p>
+
 A guitar tuner built with browser-native audio and no runtime dependencies.
 
 Run `npm start` and open **http://localhost:3000**. Node.js 18 or newer is required. Run `npm test` to verify pitch detection and tuning calculations.
