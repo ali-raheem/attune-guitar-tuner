@@ -28,3 +28,7 @@ The manifest and service worker use relative paths, so deployment at `/at/` work
 When releasing changes, commit the source and run `npm run build`, then upload all assets together. This generates `version.js` with the source commit, build time in GMT, and a unique offline-cache version. The footer displays `AtTune [commit] YYYY-MM-DD HH:mm:ss GMT`; uncommitted builds are marked `-dirty`, and source exports without Git are marked `unversioned`. Generated `version.js` is ignored by Git but must be deployed. The service worker imports it so browsers detect each new build. Each version caches the entire app during installation; an incomplete download leaves the previous version in place. Updates activate after all existing app windows close. Caches are isolated by deployment path, so `/at/` does not delete other apps' caches. Offline availability lasts while the browser retains the site's storage; clearing site data requires one online visit again.
 
 Installability background: https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Guides/Making_PWAs_installable
+
+## Licence
+
+[MIT](LICENSE) © 2026 Ali Raheem. The bundled fonts in `fonts/` (DM Sans and Manrope) are under the SIL Open Font License 1.1; see their notices in that folder.
